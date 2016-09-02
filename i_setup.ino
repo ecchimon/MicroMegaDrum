@@ -109,5 +109,13 @@ void setup()
   #else
     fastWrite(3,0);fastWrite(4,0);
   #endif
+
+  #if USE_LCD
+    lcd.createChar(0, lcdSnare);
+    lcd.createChar(1, lcdTom);
+    lcd.createChar(2, lcdCymball);
+    lcd.createChar(3, lcdHH);
+    lcd.createChar(4, lcdKick);
+  #endif    
   
 }

@@ -15,11 +15,12 @@
 //=>                                E                                         <=
 //=>                      MARCOS CESAR MONECCHI                               <=
 //=>                            22/06/2016                                    <=
+//=>                          Revisão v 0.3                                   <=
 //==============================================================================
 
 //========CONFIGURE=============
 #define USE_LCD           1     // Use LCD
-#define USE_595           1     // 1 with nanoDrum and v0.8
+#define USE_595           0     // 1 with nanoDrum and v0.8
 #define USE_PROFILER      0     // Use Profiler (only for Debug)
 #define FASTADC           1     // FASTADC = Prescaler_16, VERYFASTADC = Prescaler_8, VERYVERYFASTADC = Prescaler_4
 #define SERIALSPEED       1     // 1 = 115200, 0 = 31250 (MIDI) , picoMIDI use 115200 therefore with nanoDrum and v0.8 use 1
@@ -174,5 +175,60 @@ int MaxMultiplexerXtalk[8]={-1};
  int currentSwitchState = LOW;
 #endif
 
+#if USE_LCD
+//Define os caracteres especiais
+byte spChar[16] = {3,0,0,4,1,1,1,1,2,2,3,2,2,2,2,2};
+long tmChar[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
+byte lcdSnare[8] = {
+  0b00000,
+  0b01110,
+  0b10001,
+  0b11111,
+  0b11011,
+  0b11111,
+  0b01110,
+  0b00000
+};
+byte lcdTom[8] = {
+  0b00000,
+  0b01110,
+  0b10001,
+  0b10001,
+  0b11011,
+  0b11111,
+  0b01110,
+  0b00000
+};
+byte lcdCymball[8] = {
+  0b00000,
+  0b00001,
+  0b01110,
+  0b01100,
+  0b01010,
+  0b10010,
+  0b00010,
+  0b00000
+};
+byte lcdHH[8] = {
+  0b00000,
+  0b00100,
+  0b11011,
+  0b00100,
+  0b11011,
+  0b00100,
+  0b00100,
+  0b00000
+};
+byte lcdKick[8] = {
+  0b00000,
+  0b00100,
+  0b00010,
+  0b00001,
+  0b00011,
+  0b11101,
+  0b11111,
+  0b00000
+};
+#endif
 

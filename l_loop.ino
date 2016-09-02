@@ -24,6 +24,7 @@ void loop()
 //      USO DO MULTIPLEX RETIRADO NO MEGA
 //---------------------------------------------------------------------------------------
 #if MEGA
+/* 
   // Lê os pinos digitais
   
   // CHOKE PRATO 01
@@ -113,6 +114,7 @@ void loop()
   if( currentSwitchState == HIGH && Aux7_State == LOW ) // release
   MIDI_TX(0x90 | 128, Aux7, 127);
   Aux7_State = currentSwitchState;
+*/
 
 //Lê os pinos analógicos
 
@@ -129,7 +131,24 @@ void loop()
       }
    }
    Pin[Sensor].play(Sensor,&Pin[DualSensor(Sensor)]);
+   #if USE_LCD
+      if (Pin[Sensor].State == Scan_Time)  
+      {
+        lcd.setCursor(Sensor, 1);
+        lcd.print((char) spChar[Sensor]);
+        tmChar[Sensor] = millis(); 
+      }
+      if (Pin[Sensor].State == Normal_Time)
+      {
+        if ((millis() - tmChar[Sensor]) > 1000)
+        {
+          lcd.setCursor(Sensor,1);
+          lcd.print(' ');
+        }
+      }
+   #endif
   }
+  
 #else
   //==========UNROLLING======
   //{0, 1, 3, 2, 6, 7, 5, 4}

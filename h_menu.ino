@@ -118,6 +118,8 @@ LiquidCrystal lcd(8, 9, 10, 11, 12, 13);
 #define S_TOM4RIM PSTR("Tom4 Rim")
 #define S_EXTRA1 PSTR("Extra 1")
 #define S_EXTRA2 PSTR("Extra 2")
+#define S_CHINA PSTR("China")
+#define S_SPLASH PSTR("Splash")
 
 //==============================
 //    MENU     
@@ -585,6 +587,8 @@ void DefaultPrintName(byte pin,bool sel)
     case DP_TOM4HEAD: MenuString(S_TOM4HEAD,sel); break;
 
     #if MEGA
+    case DP_CHINA: MenuString(S_CHINA,sel); break;
+    case DP_SPLASH: MenuString(S_SPLASH,sel); break;
     #else
     case DP_TOM1RIM: MenuString(S_TOM1RIM,sel); break; 
     case DP_TOM2RIM: MenuString(S_TOM2RIM,sel); break;

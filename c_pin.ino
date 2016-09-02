@@ -155,9 +155,9 @@ class pin
   {
     Time=TIMEFUNCTION;
     this->Time=Time+this->MaskTime;
-    #if MEGA
-    this->_pin=pin;
-    #endif
+//    #if MEGA
+//    this->_pin=pin;
+//    #endif
     
     
     switch(pin)
@@ -168,60 +168,17 @@ class pin
       break;
       case DP_SNARERIM:
         this->Type=Piezo;
-        this->Note=42;
+        this->Note=39;
       break;
       case DP_KICK:
         this->Type=Piezo;
         this->Note=36;
-      break;
-      case DP_TOM1HEAD:
-        this->Type=Piezo;
-        this->Note=71;
-      break;
-      case DP_TOM2HEAD:
-        this->Type=Piezo;
-        this->Note=69;
-      break;
-      case DP_TOM3HEAD:
-        this->Type=Piezo;
-        this->Note=67;
-      break;
-      case DP_TOM4HEAD:
-        this->Type=Piezo;
-        this->Note=65;
-      break;
-     #if MEGA
-      case DP_EXTRA1:
-        this->Type=Piezo;
-        this->Note=47;
-      break;
-      case DP_EXTRA2:
-        this->Type=Piezo;
-        this->Note=73;
-      break;
-     #endif
-      case DP_HHBOW:
-        this->Type=Piezo;
-        this->Note=8;
-      break;
-      case DP_CHINA:
-        this->Type=Piezo;
-        this->Note=77;
-      break;
-      case DP_SPLASH:
-        this->Type=Piezo;
-        this->Note=79;
-      break;
-      case DP_CRASHEDGE:
-        this->Type=Piezo;
-        this->Note=81;
       break;
       case DP_HHC:
         this->Type=HHC;
         this->Thresold=10;
       break;
     }
-    
   }
   
   //===============================
@@ -235,22 +192,22 @@ class pin
     //===============================
     //        HHC
     //===============================
-    #if MEGA
-    if(Type==HHC) { scanHHC(_pin,analogRead(_pin)); return; }
-    #else
+//    #if MEGA
+//    if(Type==HHC) { scanHHC(_pin,analogRead(_pin)/8); return; }
+//    #else
     if(Type==HHC) { scanHHC(pin,analogRead(sensor)/8); return; }
-    #endif
+//    #endif
     
     //===============================
     //        Switch
     //===============================
     if(Type==Switch)
     {
-      #if MEGA
-      yn_0 = analogRead(_pin);
-      #else
+//      #if MEGA
+//      yn_0 = analogRead(_pin);
+//      #else
       yn_0 = analogRead(sensor);
-      #endif
+//      #endif
       
       //DrawDiagnostic(MulSensor,yn_0/8);
       if(State==Normal_Time) 
@@ -328,11 +285,11 @@ class pin
           Time = GlobalTime;
         }
       }
-      #if MEGA
-      yn_0 = 0.5 + ((float)analogRead(sensor)*(float)Gain)/64.0;
-      #else   
+//      #if MEGA
+//      yn_0 = 0.5 + ((float)analogRead(sensor)*(float)Gain)/64.0;
+//      #else   
       yn_0 = 0.5 + ((float)ANALOGREAD(sensor,pin)*(float)Gain)/64.0;
-      #endif
+//      #endif
         
       if(State==Retrigger_Time)
       {
@@ -533,7 +490,9 @@ class pin
       else if(State==Choke_Time) //Choke
       {
         fastNoteOn(Channel,ChokeNote,127);
-      
+
+
+     
         #if USE_WAVTRIGGER
         wavChoke(i);
         #endif
@@ -587,6 +546,7 @@ class pin
         #endif
          
         fastNoteOn(Channel,Note,v);
+
         
         State=Mask_Time;
               
