@@ -21,10 +21,11 @@ void loop()
   }
 
 //---------------------------------------------------------------------------------------
-//      USO DO MULTIPLEX RETIRADO NO MEGA
+//      LÊ OS 16 PINOS ANALOGICOS DO ARDUINO MEGA SEM MULTIPLEX E PINOS DIGITAIS
 //---------------------------------------------------------------------------------------
 #if MEGA
-/* 
+ // --- Uso dos Pinos Digitais para choke e padas adicionais ---
+ #if USE_DIG 
   // Lê os pinos digitais
   
   // CHOKE PRATO 01
@@ -114,9 +115,9 @@ void loop()
   if( currentSwitchState == HIGH && Aux7_State == LOW ) // release
   MIDI_TX(0x90 | 128, Aux7, 127);
   Aux7_State = currentSwitchState;
-*/
+#endif
 
-//Lê os pinos analógicos
+// --- Lê os pinos analógicos
 
   for(byte Sensor=0;Sensor<NPin;Sensor++)
   {
@@ -150,6 +151,9 @@ void loop()
   }
   
 #else
+
+  // --- Lê os multiplex / Microdrum original
+   
   //==========UNROLLING======
   //{0, 1, 3, 2, 6, 7, 5, 4}
   //=========================

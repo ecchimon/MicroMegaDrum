@@ -32,6 +32,7 @@
 #define MENU_LOG          1     // Enable Auto Tune (only with LCD)
 #define NANO              0     // 1 = nanoDrum , 0 = microDrum
 #define MEGA              1     // 1 = Usa Arduino Mega sem multiplex, 0 = microdrum
+#define USE_DIG           0     // 1 = Usa os pinos digitais, 0 = Desabilitado
 //==============================
 
 #if defined(__arm__) 
