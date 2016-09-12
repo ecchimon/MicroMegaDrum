@@ -247,17 +247,26 @@ void LogTool(int yn_0,byte MulSensor)
     N=0;
       
     //WAIT
+  #if USE_LCD  
     DrawLog(0);
-
+  #endif
   }
   else if(log_state==1)//FASE 1.b: ANALISI
   {
-    if(yn_0>log_Nmax) { log_Nmax=yn_0*1.2; DrawLog(4);}//Determiniamo qual'è il massimo valore di input a riposo
+    if(yn_0>log_Nmax) { log_Nmax=yn_0*1.2; 
+    #if USE_LCD
+      DrawLog(4);//Determiniamo qual'è il massimo valore di input a riposo
+    #endif
+    }
     if((log_T1+20000)<TIMEFUNCTION) //20sec
     {
       log_state=2;
-      if(d_tnum<25) DrawLog(1); //25 hit
-      else DrawLog(2);
+      #if USE_LCD
+      if(d_tnum<25) 
+         DrawLog(1); //25 hit
+      else 
+       DrawLog(2);
+      #endif  
     }
   }
   else if(log_state==2) //FASE 1.c: FINE
@@ -265,7 +274,9 @@ void LogTool(int yn_0,byte MulSensor)
     //FASE 2: analisi del segnale per 1s
     if(yn_0>log_Nmax) //Il segnale inizia al superamento della soglia
     {
-      DrawLog(0);//Wait
+      #if USE_LCD
+        DrawLog(0);//Wait
+      #endif  
       N++; //Numero di letture del segnale
       log_Tmax=log_T1=TIMEFUNCTION; //FASE 2.a: inizio dell'analisi del singolo colpo
       log_state=3;
@@ -309,9 +320,12 @@ void LogTool(int yn_0,byte MulSensor)
       if(log_Vmax<d_vmin) d_vmin=log_Vmax;
       //V2 d_vmean+=log_Vmax;
         
-      if(d_tnum<25) DrawLog(1);
-      else if(d_tnum<50) DrawLog(2);
-        
+      #if USE_LCD
+      if(d_tnum<25) 
+         DrawLog(1);
+      else if(d_tnum<50) 
+         DrawLog(2);
+      #endif    
     }
   }
   else if(log_state==4) //FASE 3: report
@@ -342,7 +356,9 @@ void LogTool(int yn_0,byte MulSensor)
       d_vmax=0;
       
       N=0;
-      DrawLog(0);//WAIT
+      #if USE_LCD
+       DrawLog(0);//WAIT
+      #endif 
     }
     else if(d_tnum==50)
     {
@@ -355,7 +371,9 @@ void LogTool(int yn_0,byte MulSensor)
       Pin[MulSensor].CurveForm= max(Pin[MulSensor].CurveForm,(1024.0/(float)d_vmax)*32); //Eventuale correzione
       Pin[MulSensor].Curve=Linear;
        
-      DrawLog(3);
+      #if USE_LCD
+        DrawLog(3);
+      #endif  
       log_state=5; //END
     }
     else if(yn_0>log_Nmax) //FASE 2.a: INIZIO
@@ -366,7 +384,9 @@ void LogTool(int yn_0,byte MulSensor)
       //log_note=0;
 
       N=0;   
-      DrawLog(0);
+      #if USE_LCD
+        DrawLog(0);
+      #endif  
     }
   }
   #else
