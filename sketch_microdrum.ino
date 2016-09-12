@@ -177,8 +177,18 @@ int MaxMultiplexerXtalk[8]={-1};
 #endif
 
 #if USE_LCD
-//Define os caracteres especiais
-byte spChar[16] = {3,0,0,4,1,1,1,1,2,2,3,2,2,2,2,2};
+//Define os caracteres especiais que serão apresentados na tela ao se tocar
+
+//spChar define a matriz de 16 posições onde se deve colocar o tipo de sensor (kick, snare, etc)
+//de acordo com o seu esquema
+
+ #define chSnare  0
+ #define chTom    1
+ #define chCymbal 2
+ #define chHH     3
+ #define chKick   4
+ 
+byte spChar[16] = {chHH,chSnare,chSnare,chKick,chTom,chTom,chTom,chTom,chCymbal,chCymbal,chHH,chCymbal,chCymbal,chCymbal,chCymbal,chCymbal};
 long tmChar[16] = {0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0};
 
 byte lcdSnare[8] = {
